@@ -1,5 +1,6 @@
+package uk.co.slightlymore.fpinscala
 
-import scala.annotation.tailrec;
+import scala.annotation.tailrec
 
 object Chapter2 {
 
