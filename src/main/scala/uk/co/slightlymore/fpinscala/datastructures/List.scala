@@ -20,7 +20,8 @@ object List {
     case Cons(d, ds) => d * product(ds)
   }
   
-  def apply[A](as: A*):  List[A] = 
+  // the * here indicates variadic argument. It's treated as Seq[A]
+  def apply[A](as: A*):  List[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
 }
