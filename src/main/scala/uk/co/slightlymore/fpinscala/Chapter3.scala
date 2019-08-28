@@ -41,5 +41,12 @@ object Chapter3 {
     println(List.drop(List(1), 2)) // should be Nil
     println(List.drop(List(1, 2, 3), 2)) // should be List(3)
     println(List.drop(List(1, 2, 3), 3)) // should be Nil
+    
+    // ex 3.5
+    println("Ex 3.5");
+    println(List.dropWhile(List(), (x: Int) => x > 2)) // should be Nil
+    println(List.dropWhile(List(1,2,3,4), (x: Int) => x > 2)) // should be List(1, 2, 3, 4)
+    println(List.dropWhile(List(1,2,3,4), (x: Int) => x <= 2)) // should be List(3, 4)
+    println(List.dropWhile2(List(1, 2, 3, 4))(_ > 2))
   }
 }

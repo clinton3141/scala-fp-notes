@@ -37,6 +37,26 @@ object List {
     case (Cons(x, xs), n) => List.drop(xs, n - 1)
   }
   
+  // ex 3.5
+  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
+    case Nil => Nil
+    case Cons(x, xs) => if (f(x)) List.dropWhile(xs, f) else l
+    
+    // alternatively we can use a pattern guard here. `case PATTERN if(CONDITION) => result`
+    // TODO: this feels more idiomatic - is it? 
+    // case Cons(x, xs) if (f(x)) => List.dropWhile(xs, f)
+    // case _ => l 
+  }
+  
+  // We can create a curried function which then helps the compiler with type inference
+  // List.dropWhile2(List(1, 2))(x => x > 2)
+  // or List.dropWhile2(List(1, 2))(_ > 2)
+  // whereas originally: List.dropWhile(List(1, 2), (x: Int) => x > 2)
+  def dropWhile2[A](l: List[A])(f: A => Boolean): List[A] = l match {
+    case Cons(x, xs) if f(x) => dropWhile2(xs)(f)
+    case _ => l
+  }
+  
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =
     if (as.isEmpty) Nil
