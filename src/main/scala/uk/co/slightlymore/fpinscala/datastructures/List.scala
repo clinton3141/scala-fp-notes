@@ -30,6 +30,13 @@ object List {
     case Cons(_, xs) => Cons(head, xs)
   }
   
+  // ex 3.4
+  def drop[A](l: List[A], n: Int): List[A] = (l, n) match {
+    case (Nil, _) => Nil
+    case (_, 0) => l
+    case (Cons(x, xs), n) => List.drop(xs, n - 1)
+  }
+  
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =
     if (as.isEmpty) Nil

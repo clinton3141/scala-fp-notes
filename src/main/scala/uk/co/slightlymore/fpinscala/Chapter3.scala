@@ -34,5 +34,12 @@ object Chapter3 {
     
     // should be Nil because we can't replace a head which doesn't exist
     println(List.setHead("new head", List()))
+    
+    // ex 3.4
+    println("Ex 3.4");
+    println(List.drop(Nil, 5)) // should be Nil
+    println(List.drop(List(1), 2)) // should be Nil
+    println(List.drop(List(1, 2, 3), 2)) // should be List(3)
+    println(List.drop(List(1, 2, 3), 3)) // should be Nil
   }
 }
