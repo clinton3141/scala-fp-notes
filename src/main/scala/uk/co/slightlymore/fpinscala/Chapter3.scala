@@ -25,5 +25,8 @@ object Chapter3 {
       case _ => 101 // no match - already matched. But would do so if no previous match
     }
     println(x)
+    
+    val x3_2 = List(1, 2, 3)
+    println(List.tail(x3_2))
   }
 }

@@ -20,6 +20,11 @@ object List {
     case Cons(d, ds) => d * product(ds)
   }
   
+  def tail[A](xs: List[A]): List[A] = xs match {
+    case Nil => Nil
+    case Cons(_, xs) => xs
+  }
+  
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =
     if (as.isEmpty) Nil
