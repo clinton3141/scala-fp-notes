@@ -28,5 +28,11 @@ object Chapter3 {
     
     val x3_2 = List(1, 2, 3)
     println(List.tail(x3_2))
+    
+    // should be List("new head", "tail1", "tail2")
+    println(List.setHead("new head", List("old head", "tail1", "tail2")))
+    
+    // should be Nil because we can't replace a head which doesn't exist
+    println(List.setHead("new head", List()))
   }
 }

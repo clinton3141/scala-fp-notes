@@ -24,6 +24,11 @@ object List {
     case Nil => Nil
     case Cons(_, xs) => xs
   }
+
+  def setHead[A](head: A, xs: List[A]): List[A] = xs match {
+    case Nil => Nil
+    case Cons(_, xs) => Cons(head, xs)
+  }
   
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =
