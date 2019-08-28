@@ -57,6 +57,20 @@ object List {
     case _ => l
   }
   
+  
+  def append[A](a1: List[A], a2: List[A]): List[A] = a1 match {
+    case Nil => a2
+    case Cons(x, xs) => Cons(x, append(xs, a2)) 
+  }
+  
+  // ex 3.6
+  // (naive recursive method)
+  def init[A](l: List[A]): List[A] = l match {
+    case Nil => Nil
+    case Cons(x, Nil) => Nil
+    case Cons(x, xs) => Cons(x, init(xs))
+  }
+  
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =
     if (as.isEmpty) Nil
