@@ -64,5 +64,12 @@ object Chapter3 {
     
     println("Ex 3.10")
     println(List.foldLeft(List(1, 2, 3), 0)(_ + _))
+    
+    println("Ex 3.11")
+    println(List.sumL(List()))
+    println(List.sumL(List(1, 2, 3, 4)))
+    println(List.productL(List()))
+    println(List.productL(List(1, 2, 3, 4)))
+    println(List.lengthL(List(1, 2, 3)))
   }
 }
