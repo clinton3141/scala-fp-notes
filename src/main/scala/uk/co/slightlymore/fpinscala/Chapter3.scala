@@ -81,6 +81,9 @@ object Chapter3 {
     
     println("Ex 3.14")
     println(List.append(List(1, 2, 3), 4))
+    
+    println("Ex 3.15")
+    println(List.concat(List(List(1, 2, 3), List(4, 5, 6))))
 
   }
 }

@@ -100,6 +100,10 @@ object List {
     
   def append[A](l: List[A], a: A): List[A] = 
     foldRight(l, List(a))((acc, x) => Cons(acc, x))
+    
+  def concat[A](ls: List[List[A]]): List[A] =
+    foldRight(ls, List[A]())(append)
+    
 
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =
