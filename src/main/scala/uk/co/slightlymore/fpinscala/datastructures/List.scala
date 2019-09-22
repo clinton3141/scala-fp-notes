@@ -1,4 +1,5 @@
 package uk.co.slightlymore.fpinscala.datastructures
+import scala.annotation.tailrec
 
 // sealed trait means that implementations can only be declared in this file 
 sealed trait List[+A]
@@ -74,6 +75,12 @@ object List {
   def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B = as match {
     case Nil => z
     case Cons(x, xs) => f(x, foldRight(xs, z)(f)) 
+  }
+  
+  @tailrec
+  def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B = as match {
+    case Nil => z
+    case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
   }
   
   def length[A](as: List[A]): Int =

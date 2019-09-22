@@ -61,5 +61,8 @@ object Chapter3 {
     println("Ex 3.9")
     println(List.length(Nil))
     println(List.length(List(1, 2, 3)))
+    
+    println("Ex 3.10")
+    println(List.foldLeft(List(1, 2, 3), 0)(_ + _))
   }
 }
