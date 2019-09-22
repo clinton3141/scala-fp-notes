@@ -91,6 +91,9 @@ object List {
   
   def length[A](as: List[A]): Int =
     foldRight(as, 0)((_, acc) => acc + 1)
+    
+  def reverse[A](l: List[A]): List[A] = 
+    foldLeft(l, Nil: List[A])((acc: List[A], x: A) => Cons(x, acc))
 
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =

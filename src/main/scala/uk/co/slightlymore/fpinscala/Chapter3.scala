@@ -71,5 +71,8 @@ object Chapter3 {
     println(List.productL(List()))
     println(List.productL(List(1, 2, 3, 4)))
     println(List.lengthL(List(1, 2, 3)))
+
+    println("Ex 3.12")
+    println(List.reverse(List(1, 2, 3)))
   }
 }
