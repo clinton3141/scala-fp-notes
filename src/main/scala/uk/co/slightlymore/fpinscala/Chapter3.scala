@@ -78,6 +78,9 @@ object Chapter3 {
     println("Ex 3.13")
     println(List.foldRight(List(1, 2, 3), List[Int]())(Cons(_, _)))
     println(List.foldRightUsingLeft(List(1, 2, 3), List[Int]())(Cons(_, _)))
+    
+    println("Ex 3.14")
+    println(List.append(List(1, 2, 3), 4))
 
   }
 }

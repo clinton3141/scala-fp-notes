@@ -97,6 +97,9 @@ object List {
     
   def foldRightUsingLeft[A, B](l: List[A], z: B)(f: (A, B) => B): B = 
     foldLeft(reverse(l), z)((acc, x) => f(x, acc))
+    
+  def append[A](l: List[A], a: A): List[A] = 
+    foldRight(l, List(a))((acc, x) => Cons(acc, x))
 
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =
