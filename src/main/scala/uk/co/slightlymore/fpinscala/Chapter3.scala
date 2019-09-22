@@ -74,5 +74,10 @@ object Chapter3 {
 
     println("Ex 3.12")
     println(List.reverse(List(1, 2, 3)))
+
+    println("Ex 3.13")
+    println(List.foldRight(List(1, 2, 3), List[Int]())(Cons(_, _)))
+    println(List.foldRightUsingLeft(List(1, 2, 3), List[Int]())(Cons(_, _)))
+
   }
 }

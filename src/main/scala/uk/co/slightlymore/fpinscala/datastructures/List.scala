@@ -94,6 +94,9 @@ object List {
     
   def reverse[A](l: List[A]): List[A] = 
     foldLeft(l, Nil: List[A])((acc: List[A], x: A) => Cons(x, acc))
+    
+  def foldRightUsingLeft[A, B](l: List[A], z: B)(f: (A, B) => B): B = 
+    foldLeft(reverse(l), z)((acc, x) => f(x, acc))
 
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =
