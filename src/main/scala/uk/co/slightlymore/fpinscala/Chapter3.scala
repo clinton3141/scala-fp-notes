@@ -96,6 +96,18 @@ object Chapter3 {
     
     println("Ex 3.19")
     println(List.filter(List(1, 2, 3, 4, 5))(_ % 2 == 0))
+    
+    println("Ex 3.20")
+    println(List.flatMap(List(1, 2, 3))(i => List(i, i)))
+    
+    println("Ex 3.21")
+    println(List.filterViaFlatMap(List(1, 2, 3, 4, 5, 6))(_ > 2))
+    
+    println("Ex 3.22")
+    println(List.addListsPairwise(List(1, 2, 3), List(4, 5, 6)))
+    
+    println("Ex 3.23")
+    println(List.zipWith(List(1, 2, 3), List(4, 5, 6))(_.toString() + _.toString()))
 
   }
 }

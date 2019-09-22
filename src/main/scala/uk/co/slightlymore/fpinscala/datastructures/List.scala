@@ -118,6 +118,29 @@ object List {
       case false => acc
       case _ => Cons(x, acc)
     })
+    
+  def flatMap[A, B](as: List[A])(f: A => List[B]): List[B] =
+    concat(map(as)(f))
+    // equivalently
+    //    foldRight(map(as)(f), List[B]())(append)
+    
+  def filterViaFlatMap[A](ls: List[A])(f: A => Boolean): List[A] = 
+    flatMap(ls)(l => if(f(l)) List(l) else Nil)
+  
+  def addListsPairwise(as: List[Int], bs: List[Int]): List[Int] = (as, bs) match {
+    case (_, Nil) => Nil
+    case (Nil, _) => Nil
+    case (Cons(x, xs), Cons(y, ys)) => Cons(x + y, addListsPairwise(xs, ys))
+  }
+  
+  // question asked to generalise addListsPairwise as zipWith. No mention of how far to
+  // take generalisation so I've gone all the way with 3 type parameters
+  def zipWith[A, B, C](as: List[A], bs: List[B])(f: (A, B) => C): List[C] = (as, bs) match {
+    case (_, Nil) => Nil
+    case (Nil, _) => Nil
+    case (Cons(x, xs), Cons(y, ys)) => Cons(f(x, y), zipWith(xs, ys)(f))
+  }
+    
 
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =
