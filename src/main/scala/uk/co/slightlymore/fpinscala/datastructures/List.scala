@@ -140,6 +140,21 @@ object List {
     case (Nil, _) => Nil
     case (Cons(x, xs), Cons(y, ys)) => Cons(f(x, y), zipWith(xs, ys)(f))
   }
+  
+  @tailrec
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = {
+    @tailrec
+    def startsWith(list: List[A], prefix: List[A]): Boolean = (list, prefix) match { 
+      case (_, Nil) => true
+      case (Cons(fh, ft), Cons(ph, pt)) => fh == ph && startsWith(ft, pt)
+      case _ => false
+    }
+    sup match {
+      case Nil => false
+      case _ if startsWith(sup, sub) => true
+      case Cons (x, xs) => hasSubsequence(xs, sub)
+    }
+  }
     
 
   // the * here indicates variadic argument. It's treated as Seq[A]

@@ -108,6 +108,17 @@ object Chapter3 {
     
     println("Ex 3.23")
     println(List.zipWith(List(1, 2, 3), List(4, 5, 6))(_.toString() + _.toString()))
-
+    
+    println("Ex 3.24")
+    // should all be true
+    println(List.hasSubsequence(List(1, 2, 3), List(1,2, 3)))
+    println(List.hasSubsequence(List(1, 2, 3), List(1, 2)))
+    println(List.hasSubsequence(List(1, 2, 3), List(2, 3)))
+    println(List.hasSubsequence(List(1, 2, 3), List(1)))
+    println(List.hasSubsequence(List(1, 2, 3), List(2)))
+    println(List.hasSubsequence(List(1, 2, 3), List(3)))
+    // should be false
+    println(List.hasSubsequence(List(1, 2, 3), List(1, 3)))
+    println(List.hasSubsequence(List(1, 2, 3), List(4)))
   }
 }
