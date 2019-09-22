@@ -53,5 +53,9 @@ object Chapter3 {
     println(List.init(List(1))) // should be Nil
     println(List.init(List(1, 2))) // should be List(1)
     println(List.init(List(1, 2, 3))) // should be List(1, 2)
+    
+    println("Ex 3.8")
+    // calling with Nil and Cons returns the original list
+    println(List.foldRight(List(1, 2, 3), Nil:List[Int])(Cons(_, _)))
   }
 }

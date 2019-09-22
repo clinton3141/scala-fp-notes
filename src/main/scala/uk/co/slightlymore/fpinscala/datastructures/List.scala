@@ -71,6 +71,11 @@ object List {
     case Cons(x, xs) => Cons(x, init(xs))
   }
   
+  def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B = as match {
+    case Nil => z
+    case Cons(x, xs) => f(x, foldRight(xs, z)(f)) 
+  }
+  
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =
     if (as.isEmpty) Nil
