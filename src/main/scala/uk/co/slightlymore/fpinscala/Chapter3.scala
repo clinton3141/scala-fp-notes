@@ -120,5 +120,38 @@ object Chapter3 {
     // should be false
     println(List.hasSubsequence(List(1, 2, 3), List(1, 3)))
     println(List.hasSubsequence(List(1, 2, 3), List(4)))
+    
+    println("Ex 3.25")
+    println(Tree.size(Leaf(1)))
+    println(Tree.size(Branch(Leaf(1), Leaf(1))))
+    println(Tree.size(Branch(Leaf(1), Branch(Leaf(1), Leaf(2)))))
+    
+    println("Ex 3.26")
+    println(Tree.maximum(Branch(Leaf(1), Branch(Leaf(10), Branch(Leaf(12), Leaf(42))))))
+    println(Tree.maximum(Branch(Leaf(1), Branch(Leaf(42), Branch(Leaf(12), Leaf(4))))))
+    println(Tree.maximum(Branch(Branch(Leaf(42), Branch(Leaf(12), Leaf(4))), Leaf(1))))
+    
+    println("Ex 3.27")
+    println(Tree.depth(Leaf(1)))
+    println(Tree.depth(Branch(Leaf(1), Leaf(1))))
+    println(Tree.depth(Branch(Leaf(1), Branch(Leaf(1), Leaf(1)))))
+    
+    println("Ex 3.28")
+    println(Tree.map(Branch(Leaf(1), Leaf(2)))(i => i + 1))
+    
+    println("Ex 3.29")
+    println(Tree.size2(Leaf(1)))
+    println(Tree.size2(Branch(Leaf(1), Leaf(1))))
+    println(Tree.size2(Branch(Leaf(1), Branch(Leaf(1), Leaf(2)))))
+    
+    println(Tree.maximum2(Branch(Leaf(1), Branch(Leaf(10), Branch(Leaf(12), Leaf(42))))))
+    println(Tree.maximum2(Branch(Leaf(1), Branch(Leaf(42), Branch(Leaf(12), Leaf(4))))))
+    println(Tree.maximum2(Branch(Branch(Leaf(42), Branch(Leaf(12), Leaf(4))), Leaf(1))))
+    
+    println(Tree.depth2(Leaf(1)))
+    println(Tree.depth2(Branch(Leaf(1), Leaf(1))))
+    println(Tree.depth2(Branch(Leaf(1), Branch(Leaf(1), Leaf(1)))))
+    
+    println(Tree.map2(Branch(Leaf(1), Leaf(2)))(i => i + 1))
   }
 }
