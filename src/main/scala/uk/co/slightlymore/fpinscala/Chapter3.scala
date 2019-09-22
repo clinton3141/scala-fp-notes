@@ -57,5 +57,9 @@ object Chapter3 {
     println("Ex 3.8")
     // calling with Nil and Cons returns the original list
     println(List.foldRight(List(1, 2, 3), Nil:List[Int])(Cons(_, _)))
+    
+    println("Ex 3.9")
+    println(List.length(Nil))
+    println(List.length(List(1, 2, 3)))
   }
 }

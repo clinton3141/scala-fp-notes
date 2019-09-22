@@ -76,6 +76,9 @@ object List {
     case Cons(x, xs) => f(x, foldRight(xs, z)(f)) 
   }
   
+  def length[A](as: List[A]): Int =
+    foldRight(as, 0)((_, acc) => acc + 1)
+
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =
     if (as.isEmpty) Nil
