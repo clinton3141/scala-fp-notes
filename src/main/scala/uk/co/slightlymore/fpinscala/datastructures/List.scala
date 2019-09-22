@@ -104,6 +104,20 @@ object List {
   def concat[A](ls: List[List[A]]): List[A] =
     foldRight(ls, List[A]())(append)
     
+  def add1(l: List[Int]): List[Int] = 
+    foldRight(l, List[Int]())((i, acc) => Cons(i + 1, acc))
+    
+  def doubleToString(l: List[Double]): List[String] = 
+    foldRight(l, List[String]())((d, acc) => Cons(d.toString(), acc))
+    
+  def map[A, B](l: List[A])(f: A => B): List[B] =
+    foldRight(l, List[B]())((x, acc) => Cons(f(x), acc))
+
+  def filter[A](l: List[A])(f: A => Boolean): List[A] = 
+    foldRight(l, List[A]())((x, acc) => f(x) match {
+      case false => acc
+      case _ => Cons(x, acc)
+    })
 
   // the * here indicates variadic argument. It's treated as Seq[A]
   def apply[A](as: A*):  List[A] =

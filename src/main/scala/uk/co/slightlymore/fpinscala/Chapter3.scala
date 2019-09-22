@@ -84,6 +84,18 @@ object Chapter3 {
     
     println("Ex 3.15")
     println(List.concat(List(List(1, 2, 3), List(4, 5, 6))))
+    
+    println("Ex 3.16")
+    println(List.add1(List(1, 2, 3)))
+    
+    println("Ex 3.17")
+    println(List.doubleToString(List(1.0, 2.0, 3.142)))
+    
+    println("Ex 3.18")
+    println(List.map(List(1, 2, 3))(_ + 1))
+    
+    println("Ex 3.19")
+    println(List.filter(List(1, 2, 3, 4, 5))(_ % 2 == 0))
 
   }
 }
