@@ -1,7 +1,7 @@
 package uk.co.slightlymore.fpinscala
 
 import uk.co.slightlymore.fpinscala.datastructures.option._
-import uk.co.slightlymore.fpinscala.datastructures.List
+import uk.co.slightlymore.fpinscala.datastructures.{List => CustomList}
 
 object Chapter4 {
   def mean(xs: Seq[Double]): Option[Double] = if (xs.isEmpty) None else Some(xs.sum / xs.length)
@@ -12,7 +12,7 @@ object Chapter4 {
     def add = (x: Int) => x + 1
     println(Option.lift(add)(Some(1)))
     
-    println(Option.sequence(List(Some(1), Some(2))))
-    println(Option.sequence(List(Some(1), None, Some(3))))
+    println(Option.sequenceCustom(CustomList(Some(1), Some(2))))
+    println(Option.sequenceCustom(CustomList(Some(1), None, Some(3))))
   }
 }

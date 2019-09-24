@@ -1,6 +1,6 @@
 package uk.co.slightlymore.fpinscala.datastructures.option
 
-import uk.co.slightlymore.fpinscala.datastructures.List 
+import uk.co.slightlymore.fpinscala.datastructures.{List => CustomList} 
 
 sealed trait Option[+A] {
   def map[B](f: A => B): Option[B] = this match {
@@ -34,10 +34,10 @@ case object None extends Option[Nothing]
 object Option {
   def lift[A, B](f: A => B): Option[A] => Option[B] = (a: Option[A]) => a.map(f) // or _.map(f)
 
-  def sequence[A](a: List[Option[A]]): Option[List[A]] = {
-    List.foldLeft(a, Some(List[A]()): Option[List[A]])((acc, option) => option match {
+  def sequenceCustom[A](a: CustomList[Option[A]]): Option[CustomList[A]] = {
+    CustomList.foldLeft(a, Some(CustomList[A]()): Option[CustomList[A]])((acc, option) => option match {
       case None => None
-      case Some(x) => acc.map(xs => List.append(xs, x)) 
+      case Some(x) => acc.map(xs => CustomList.append(xs, x)) 
     });
   }
 }
