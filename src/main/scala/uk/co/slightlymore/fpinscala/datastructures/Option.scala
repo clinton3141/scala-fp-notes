@@ -28,3 +28,7 @@ sealed trait Option[+A] {
 }
 case class Some[A](value: A) extends Option[A]
 case object None extends Option[Nothing]
+
+object Option {
+  def lift[A, B](f: A => B): Option[A] => Option[B] = (a: Option[A]) => a.map(f) // or _.map(f)
+}

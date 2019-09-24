@@ -7,10 +7,8 @@ object Chapter4 {
   
   def variance(xs: Seq[Double]): Option[Double] = mean(xs).flatMap(x_bar => mean(xs.map(x => math.pow(x - x_bar, 2))))
   
-  def lift[A, B](f: A => B): Option[A] => Option[B] = (a: Option[A]) => a.map(f) // or _.map(f)
-  
   def main(args: Array[String]): Unit = {
     def add = (x: Int) => x + 1
-    println(lift(add)(Some(1)))
+    println(Option.lift(add)(Some(1)))
   }
 }
