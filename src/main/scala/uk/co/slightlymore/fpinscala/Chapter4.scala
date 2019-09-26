@@ -14,5 +14,19 @@ object Chapter4 {
     
     println(Option.sequenceCustom(CustomList(Some(1), Some(2))))
     println(Option.sequenceCustom(CustomList(Some(1), None, Some(3))))
+    
+    println("Sequence")
+    println(Option.sequence(List(Some(1), Some(2))))
+    println(Option.sequence(List(Some(1), None, Some(3))))
+    println(Option.sequence(List()))
+    println(Option.sequence(Nil))
+
+    println("traverse")
+    println(Option.traverse(List(1, 2))(x => Some(1 + x)))
+    println(Option.traverse(List(1, 2))(x => Some(1 + x)))
+    
+    println("sequence via traverse")
+    println(Option.sequenceViaTraverse(List(Some(1), None)))
+    println(Option.sequenceViaTraverse(List(Some(1), Some(2))))
   }
 }

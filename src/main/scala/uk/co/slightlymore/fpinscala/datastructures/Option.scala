@@ -40,4 +40,17 @@ object Option {
   
   // second attempt - presumably better (more FP) because it's using flatMap? 
   def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = a.flatMap(a_ => b.map(b_ => f(a_, b_)))
+
+  def sequence[A](a: List[Option[A]]): Option[List[A]] = {
+//    a.foldRight(Some(Nil): Option[List[A]])((option, acc) => map2(option, acc)((h, t) => h :: t))
+    a.foldRight(Some(Nil): Option[List[A]])(map2(_, _)(_ :: _))
+  }
+
+  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = a match {
+    case Nil => Some(Nil)
+//    case h :: t => map2(f(h), traverse(t)(f))((h, t) => h :: t)
+    case h :: t => map2(f(h), traverse(t)(f))(_ :: _)
+  }
+  
+  def sequenceViaTraverse[A](a: List[Option[A]]): Option[List[A]] = traverse(a)(x => x)
 }
