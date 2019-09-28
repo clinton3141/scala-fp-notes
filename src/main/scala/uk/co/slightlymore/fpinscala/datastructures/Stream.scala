@@ -7,6 +7,24 @@ sealed trait Stream[+A] {
     case Empty => None
     case Cons(h, t) => Some(h()) // we have to evaluate the thunk to get the value for Some
   }
+
+  def toListNaive: List[A] = this match {
+    case Empty => Nil
+    case Cons(h, t) => h() :: (t().toListNaive)
+  }
+
+  def toList: List[A] = {
+    @tailrec
+    def loop(next: Stream[A], acc: List[A]): List[A] = {
+      next match {
+        case Cons(h, t) => loop(t(), h() :: acc) 
+        case _ => acc
+      }
+    }
+
+    // loop builds the list in reverse, so need to reverse again
+    loop(this, Nil).reverse
+  }
 }
 case object Empty extends Stream[Nothing]
 case class Cons[+A](h: () => A, t: () => Stream[A]) extends Stream[A]
