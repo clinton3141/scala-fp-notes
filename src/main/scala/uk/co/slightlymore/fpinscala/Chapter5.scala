@@ -18,5 +18,8 @@ object Chapter5 {
     
     println(Stream(1, 2, 3, 4, 5).forAll(_ > 0))
     println(Stream(1, 2, 3, 4, 5).forAll(_ < 0))
+    
+    println(Stream(1, 2, 3, 4, 5).headOptionViaFoldRight)
+    println(Stream().headOptionViaFoldRight)
   }
 }
