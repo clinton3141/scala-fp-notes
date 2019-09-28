@@ -10,8 +10,11 @@ object Chapter5 {
     
     println(Stream(1, 2, 3, 4, 5) drop(2) toList)
     
+    println("takeWhile")
     println(Stream(1, 2, 3, 4, 5).takeWhile(_ < 3).toList)
+    println(Stream(1, 2, 3, 4, 5).takeWhileViaFoldRight(_ < 3).toList)
     println(Stream(1, 2, 3, 4, 5).takeWhile(_ > 3).toList)
+    println(Stream(1, 2, 3, 4, 5).takeWhileViaFoldRight(_ > 3).toList)
     
     println(Stream(1, 2, 3, 4, 5).forAll(_ > 0))
     println(Stream(1, 2, 3, 4, 5).forAll(_ < 0))

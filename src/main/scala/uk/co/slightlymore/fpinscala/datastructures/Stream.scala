@@ -62,6 +62,9 @@ sealed trait Stream[+A] {
     foldRight(true)((next, acc) => acc && p(next))
   
   def forAll2(p: A => Boolean): Boolean = exists(!p(_))
+  
+  def takeWhileViaFoldRight(f: A => Boolean): Stream[A] = 
+    foldRight(empty: Stream[A])((next, acc) => if (f(next)) cons(next, acc) else empty)
 }
 
 case object Empty extends Stream[Nothing]
