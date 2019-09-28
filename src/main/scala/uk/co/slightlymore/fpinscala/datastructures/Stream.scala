@@ -47,6 +47,16 @@ sealed trait Stream[+A] {
     case Cons(h, t) if f(h()) => cons(h(), t() takeWhile(f))
     case _ => empty
   }
+  
+  def exists(p: A => Boolean): Boolean = this match {
+    case Cons(h, t) => p(h()) || t().exists(p)
+    case _ => false
+  }
+  
+  def foldRight[B](z: => B)(f: (A, => B) => B): B = this match {
+    case Cons(h, t) => f(h(), t().foldRight(z)(f)) // because the second arg is by name, it is only evaluated if required
+    case _ => z
+  }
 }
 
 case object Empty extends Stream[Nothing]
