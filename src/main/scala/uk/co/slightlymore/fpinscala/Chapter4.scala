@@ -1,6 +1,6 @@
 package uk.co.slightlymore.fpinscala
 
-import uk.co.slightlymore.fpinscala.datastructures.option._
+import uk.co.slightlymore.fpinscala.datastructures.{Option, Some, None}
 import uk.co.slightlymore.fpinscala.datastructures.{List => CustomList}
 
 object Chapter4 {
