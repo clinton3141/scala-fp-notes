@@ -21,5 +21,13 @@ object Chapter5 {
     
     println(Stream(1, 2, 3, 4, 5).headOptionViaFoldRight)
     println(Stream().headOptionViaFoldRight)
+    
+    println(Stream.constant("Hello").take(3).toList)
+    
+    println(Stream.ones.take(5).toList)
+    println(Stream.from(0).take(5).toList)
+    
+    println(Stream.fibs.take(1).toList)
+    println(Stream.fibs.take(5).toList)
   }
 }

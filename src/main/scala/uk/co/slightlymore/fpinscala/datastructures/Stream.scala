@@ -99,6 +99,18 @@ object Stream {
   // for better type inference
   def empty[A]: Stream[A] = Empty
   
+  // because streams are incremental, we can create infinite streams:
+  def ones: Stream[Int] = cons(1, ones)
+  
+  def constant[A](a: A): Stream[A] = cons(a, constant(a))
+  
+  def from(n: Int): Stream[Int] = cons(n, from(n + 1))
+  
+  def fibs: Stream[Int] = {
+    def generate(prev1: Int, prev2: Int): Stream[Int] = cons(prev1, generate(prev1, prev1+prev2))
+    generate(0, 1)
+  }
+
   def apply[A](as: A*): Stream[A] =
     // note that thunks are created - () => as.head and () => apply(as.tail) for call by name in cons
     if (as.isEmpty) empty else cons(as.head, apply(as.tail: _*))
