@@ -36,4 +36,6 @@ object Either {
     // Note: the above flatMap => traverse... is equivalent to map2. Watch out for these! So:
     case h :: t => f(h).map2(traverse(t)(f))((head, tail) => head :: tail)
   }
+
+  def Try[A](a: => A): Either[Exception, A] = try { Right(a) } catch { case e: Exception => Left(e) }  
 }
