@@ -2,6 +2,11 @@ package main.scala.uk.co.slightlymore.fpinscala.datastructures
 
 import scala.annotation.tailrec
 
+// TODO: why is this needed here? It seems to be importing object Stream, meaning that 
+// `cons` and `empty` are available as methods within the Stream trait. What is going 
+// on under the hood?
+import Stream._
+
 sealed trait Stream[+A] {
   def headOption: Option[A] = this match {
     case Empty => None
@@ -25,7 +30,20 @@ sealed trait Stream[+A] {
     // loop builds the list in reverse, so need to reverse again
     loop(this, Nil).reverse
   }
+
+  def take(n: Int): Stream[A] = this match {
+    case Cons(h, t) if n > 0 => cons(h(), t() take(n - 1))
+    case _ => empty
+  }
+
+  // this is tail recursive, but requires to be final so that it cannot be overridden
+  @tailrec
+  final def drop(n: Int): Stream[A] = this match {
+    case Cons(_, t) if n > 0 => t() drop(n - 1)
+    case _ => this
+  }
 }
+
 case object Empty extends Stream[Nothing]
 case class Cons[+A](h: () => A, t: () => Stream[A]) extends Stream[A]
 
