@@ -57,6 +57,11 @@ sealed trait Stream[+A] {
     case Cons(h, t) => f(h(), t().foldRight(z)(f)) // because the second arg is by name, it is only evaluated if required
     case _ => z
   }
+  
+  def forAll(p: A => Boolean): Boolean = 
+    foldRight(true)((next, acc) => acc && p(next))
+  
+  def forAll2(p: A => Boolean): Boolean = exists(!p(_))
 }
 
 case object Empty extends Stream[Nothing]
