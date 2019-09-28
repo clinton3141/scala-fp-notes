@@ -29,5 +29,13 @@ object Chapter5 {
     
     println(Stream.fibs.take(1).toList)
     println(Stream.fibs.take(5).toList)
+    
+    println(Stream.unfold(0)(x => Some((x, x + 1))).take(4).toList)
+    
+    println(Stream.fibsViaUnfold.take(10).toList)
+    
+    println(Stream.fromViaUnfold(5).take(4).toList)
+    
+    println(Stream.constantViaUnfold(5).take(4).toList)
   }
 }

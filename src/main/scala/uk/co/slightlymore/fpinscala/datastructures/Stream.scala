@@ -110,6 +110,23 @@ object Stream {
     def generate(prev1: Int, prev2: Int): Stream[Int] = cons(prev1, generate(prev1, prev1+prev2))
     generate(0, 1)
   }
+  
+  def unfold[A, S](z: S)(f: S => Option[(A, S)]): Stream[A] = f(z) match {
+    case None => empty
+    case Some((h, s)) => cons(h, unfold(s)(f))
+  }
+  
+  def fibsViaUnfold: Stream[Int] =
+    unfold((0, 1))(_ match { case(prev1, prev2) => Some(prev1, (prev2, prev1 + prev2)) })
+  
+  def fromViaUnfold(n: Int): Stream[Int] =
+    unfold(n)(x => Some((x, x + 1)))
+    
+  def constantViaUnfold[A](a: A): Stream[A] =
+    unfold(a)(_ => Some(a, a))
+  
+  def onesViaUnfold: Stream[Int] = 
+    unfold(1)(_ => Some(1, 1))
 
   def apply[A](as: A*): Stream[A] =
     // note that thunks are created - () => as.head and () => apply(as.tail) for call by name in cons
