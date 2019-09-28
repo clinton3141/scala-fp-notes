@@ -7,6 +7,7 @@ object Chapter5 {
     println(Stream(1, 2, 3, 4) take(0) toList)
     println(Stream(1) take(1) toList)
     println(Stream(1, 2, 3, 4, 5) take(2) toList)
+    println(Stream(1, 2, 3, 4, 5) takeViaUnfold(2) toList)
     
     println(Stream(1, 2, 3, 4, 5) drop(2) toList)
     
@@ -37,5 +38,10 @@ object Chapter5 {
     println(Stream.fromViaUnfold(5).take(4).toList)
     
     println(Stream.constantViaUnfold(5).take(4).toList)
+    
+    println(Stream(1, 2, 3).zipWith(Stream("One", "Two", "Three", "Four"))((n, s) => s"$n: $s") toList)
+    
+    println(Stream(1, 2, 3, 4).zipAll(Stream(1, 2)) toList)
+    println(Stream(1, 2).zipAll(Stream(1, 2, 3, 4)) toList)
   }
 }
