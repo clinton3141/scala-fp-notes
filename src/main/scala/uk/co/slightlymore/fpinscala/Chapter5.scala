@@ -43,5 +43,11 @@ object Chapter5 {
     
     println(Stream(1, 2, 3, 4).zipAll(Stream(1, 2)) toList)
     println(Stream(1, 2).zipAll(Stream(1, 2, 3, 4)) toList)
+    
+    assert((Stream(1, 2, 3, 4) startsWith Stream(1, 2)) == true, "1234 starts with 12")
+    assert((Stream(1, 2, 3, 4) startsWith Stream(2, 3)) == false, "1234 starts with 23")
+    assert((Stream(1, 2, 3, 4) startsWith Stream()) == true, "1234 starts with empty")
+    assert((Stream() startsWith Stream()) == true, "empty starts with empty")
+    assert((Stream() startsWith Stream(1, 2, 3)) == false, "empty starts with 123")
   }
 }
