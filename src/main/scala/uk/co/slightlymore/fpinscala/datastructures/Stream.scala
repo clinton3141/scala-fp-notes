@@ -113,14 +113,12 @@ sealed trait Stream[+A] {
       case (Cons(h1, t1), Cons(h2, t2)) => Some( (Some(h1()), Some(h2())), (t1(), t2()))
       case _ => None
     })
-    
-    
-  // not quite there. Stream() startsWith Stream(1) is true
-  def startsWith[AA >: A](s: Stream[AA]): Boolean =
-    unfold((s, this))({
-      case (Cons(sh, st), Cons(th, tt)) => Some(sh() == th(), (st(), tt()))
-      case _ => None
-    }).forAll(p => p)
+
+  def startsWith[AA >: A](s: Stream[AA]): Boolean = (this, s) match { 
+    case (_, Empty) => true
+    case (Empty, _) => false
+    case _ => zipWith(s)(_ == _).forAll(p => p) 
+  }
 }
 
 case object Empty extends Stream[Nothing]
