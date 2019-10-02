@@ -49,5 +49,7 @@ object Chapter5 {
     assert((Stream(1, 2, 3, 4) startsWith Stream()) == true, "1234 starts with empty")
     assert((Stream() startsWith Stream()) == true, "empty starts with empty")
     assert((Stream() startsWith Stream(1, 2, 3)) == false, "empty starts with 123")
+
+    println(Stream(1, 2, 3).tails.toList.map(x => x.toList))
   }
 }

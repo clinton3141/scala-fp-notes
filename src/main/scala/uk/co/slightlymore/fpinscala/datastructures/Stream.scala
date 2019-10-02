@@ -119,6 +119,16 @@ sealed trait Stream[+A] {
     case (Empty, _) => false
     case _ => zipWith(s)(_ == _).forAll(p => p) 
   }
+  
+  def tails: Stream[Stream[A]] = 
+    unfold(this)({
+      case Empty => None
+      case stream => Some(stream, stream.drop(1))
+    })
+  
+  def hasSubSequence[A](s: Stream[A]): Boolean =
+    tails exists (_ startsWith s)
+     
 }
 
 case object Empty extends Stream[Nothing]
