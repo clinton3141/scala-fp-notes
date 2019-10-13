@@ -27,7 +27,7 @@ object RNG {
   // Ex 6.2
   def double(rng: RNG): (Double, RNG) = {
     val (n, r) = rng.nextInt
-    (1D / n.toDouble, r)
+    (n / (Int.MaxValue.toDouble), r)
   }
   
   // Ex 6.3
