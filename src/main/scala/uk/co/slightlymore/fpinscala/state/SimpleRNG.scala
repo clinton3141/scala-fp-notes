@@ -5,6 +5,8 @@ trait RNG {
 }
 
 object RNG {
+  type Rand[+A] = RNG => (A, RNG)
+
   case class Simple(seed: Long) extends RNG {
     def nextInt: (Int, RNG) = {
       val newSeed = (seed * 0x5DEECE66DL + 0xBL) & 0xFFFFFFFFFFFFL
@@ -56,4 +58,20 @@ object RNG {
       ((i :: is), r2)
     }
   }
+  
+  val int: Rand[Int] = _.nextInt
+  
+  def unit[A](a: A): Rand[A] = rng => (a, rng)
+  
+  def map[A, B](s: Rand[A])(f: A => B): Rand[B] = 
+    rng => {
+      val (a, rng2) = s(rng)
+      (f(a), rng2) 
+    }
+    
+  def nonNegativeEven: Rand[Int] = 
+    map(nonNegativeInt)(i => i - i % 2)
+    
+  def double2: Rand[Double] = 
+    map(int)(_ / (Int.MaxValue.toDouble))
 }
