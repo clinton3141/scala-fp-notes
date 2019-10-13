@@ -51,5 +51,7 @@ object Chapter5 {
     assert((Stream() startsWith Stream(1, 2, 3)) == false, "empty starts with 123")
 
     println(Stream(1, 2, 3).tails.toList.map(x => x.toList))
+    
+    println(Stream(1, 2, 3).scanRight(0) (_ + _) toList)
   }
 }

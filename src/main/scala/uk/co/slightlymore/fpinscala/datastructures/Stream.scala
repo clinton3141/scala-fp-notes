@@ -125,6 +125,15 @@ sealed trait Stream[+A] {
       case Empty => None
       case stream => Some(stream, stream.drop(1))
     })
+    
+  def scanRight[B](z: B)(f: (A, => B) => B): Stream[B] =
+    foldRight((z, Stream(z)))((a, b) => {
+      lazy val bConcrete = b
+      val bNew = f(a, bConcrete._1)
+      (bNew, cons(bNew, bConcrete._2))
+    }) match {
+      case (_, result) => result
+    }
   
   def hasSubSequence[A](s: Stream[A]): Boolean =
     tails exists (_ startsWith s)
