@@ -91,6 +91,13 @@ object RNG {
     // below is tempting... but I don't know if future me would go on a murdering spree 
     // fs.foldRight(unit(List[A]()))(map2(_, _)((_ :: _)))
     
+  def nonNegativeLessThan(n: Int): Rand[Int] = {
+    flatMap(nonNegativeInt) { i =>
+      val mod = i % n
+      if (i + (n-1) - mod >= 0) unit(mod) else nonNegativeLessThan(n)
+    }
+  }
+  
   def flatMap[A, B](f: Rand[A])(g: A => Rand[B]): Rand[B] = rng => {
     val (a, r) = f(rng)
     g(a)(r)
