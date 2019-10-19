@@ -90,4 +90,17 @@ object RNG {
     fs.foldRight(unit(List[A]()))((rng, acc) => map2(rng, acc)((next, list) => (next :: list)))
     // below is tempting... but I don't know if future me would go on a murdering spree 
     // fs.foldRight(unit(List[A]()))(map2(_, _)((_ :: _)))
+    
+  def flatMap[A, B](f: Rand[A])(g: A => Rand[B]): Rand[B] = rng => {
+    val (a, r) = f(rng)
+    g(a)(r)
+  }
+  
+  def mapV2[A, B](s: Rand[A])(f: A => B): Rand[B] =
+    flatMap(s)(a => unit(f(a)))
+  
+  def map2V2[A, B, C](ra: Rand[A], rb: Rand[B])(f: (A, B) => C): Rand[C] =
+    flatMap(ra)(a => map(rb)(b => f(a, b)))
+    // attempt 1:
+    // flatMap(ra)(a => flatMap(rb)(b => unit(f(a, b))))
 }
