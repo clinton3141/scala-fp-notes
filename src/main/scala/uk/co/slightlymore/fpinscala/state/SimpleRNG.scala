@@ -85,4 +85,9 @@ object RNG {
   def randIntDouble: Rand[(Int, Double)] = both(int, double)
   
   def randDoubleInt: Rand[(Double, Int)] = both(double, int)
+
+  def sequence2[A](fs: List[Rand[A]]): Rand[List[A]] = 
+    fs.foldRight(unit(List[A]()))((rng, acc) => map2(rng, acc)((next, list) => (next :: list)))
+    // below is tempting... but I don't know if future me would go on a murdering spree 
+    // fs.foldRight(unit(List[A]()))(map2(_, _)((_ :: _)))
 }
